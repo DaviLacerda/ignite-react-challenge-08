@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { api } from "../services/api";
 import "../styles/sidebar.scss";
@@ -15,7 +15,7 @@ interface SideBarProps {
     onClick: (id: number) => void
 }
 
-export function SideBar({ genres, currentGenre, onClick} : SideBarProps) {
+function SideBarComponent({ genres, currentGenre, onClick} : SideBarProps) {
     return (
         <nav className="sidebar">
             <span>
@@ -36,3 +36,5 @@ export function SideBar({ genres, currentGenre, onClick} : SideBarProps) {
         </nav>
     );
 }
+
+export const SideBar = memo(SideBarComponent)

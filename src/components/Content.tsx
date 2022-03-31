@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo } from 'react'
 import { api } from '../services/api';
 import { MovieCard } from '../components/MovieCard';
 
@@ -25,7 +25,7 @@ interface ContentProps{
     currentGenre: GenreResponseProps
 }
 
-export function Content({ movies, currentGenre } : ContentProps) {
+function ContentComponent({ movies, currentGenre } : ContentProps) {
     return (
         <div className="container">
             <header>
@@ -50,3 +50,7 @@ export function Content({ movies, currentGenre } : ContentProps) {
         </div>
     );
 }
+
+export const Content = memo(ContentComponent, (prevProps, nextProps) => {
+    return prevProps.currentGenre.id === nextProps.currentGenre.id;
+})
